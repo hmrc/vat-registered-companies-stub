@@ -12,7 +12,7 @@ enablePlugins(
 // ================================================================================
 // Play configuration
 // ================================================================================
-PlayKeys.playDefaultPort := 8702
+PlayKeys.playDefaultPort := 8732
 
 // ================================================================================
 // Testing
@@ -89,7 +89,7 @@ scalacOptions ++= Seq(
 // Misc
 // ================================================================================
 
-// initialCommands in Test := "import uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld"
+initialCommands in Test := "import uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld"
 majorVersion := 0
 uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 
