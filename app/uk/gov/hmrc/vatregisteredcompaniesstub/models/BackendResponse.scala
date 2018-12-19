@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.vatregisteredcompaniesstub
+package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
-import play.api.libs.json.{Json, OFormat}
+import java.time.LocalDateTime
 
-package object models {
+import play.api.libs.json.Json
 
-  // TODO figure out if these type alias' are advantageous or not
-  type CompanyName = String
-  type VatNumber = String
+// TODO this may be redundate HttpResponse would be fine i think
 
+case class BackendResponse (
+  outcome: String,
+  processingDate: LocalDateTime,
+  code: Option[String]
+)
 
-
+object BackendResponse {
+  implicit val backendResponseFormat = Json.format[BackendResponse]
 }
