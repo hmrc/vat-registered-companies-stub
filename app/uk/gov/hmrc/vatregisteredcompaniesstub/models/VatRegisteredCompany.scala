@@ -16,16 +16,8 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
-case class Payload(
-  createsAndUpdates: List[VatRegisteredCompany],
-  deletes: List[VatNumber]
-)
+import play.api.libs.json.{Json, OFormat}
 
-case class VatRegisteredCompany(
-  companyName: CompanyName,
-  vatNumber: VatNumber,
-  address: Address
-)
 
 case class Address(
   line1: String,
@@ -36,5 +28,42 @@ case class Address(
   postcode: Option[String],
   countryCode: String
 )
+
+object Address {
+  implicit val addressFormat: OFormat[Address] =
+    Json.format[Address]
+}
+
+//case class VatNumber(
+//  vatNumber: String
+//)
+//
+//object VatNumber {
+//  implicit val vatNumberFormat: OFormat[VatNumber] =
+//    Json.format[VatNumber]
+//}
+
+case class VatRegisteredCompany(
+  name: CompanyName,
+  vatNumber: VatNumber,
+  address: Address
+)
+
+object VatRegisteredCompany {
+  implicit val vatRegisteredCompanyFormat: OFormat[VatRegisteredCompany] =
+    Json.format[VatRegisteredCompany]
+}
+
+case class Payload(
+  createsAndUpdates: List[VatRegisteredCompany],
+  deletes: List[VatNumber]
+)
+
+object Payload {
+  implicit val payloadFormat: OFormat[Payload] =
+    Json.format[Payload]
+}
+
+
 
 

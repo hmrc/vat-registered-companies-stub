@@ -1,3 +1,6 @@
 # microservice specific routes
 
 GET        /hello-world             uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld.hello
+
+# TODO move to the testOnlyRoutes
+GET        /trigger-mdg-data-post   uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost
