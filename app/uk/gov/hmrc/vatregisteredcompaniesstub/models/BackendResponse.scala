@@ -20,7 +20,7 @@ import java.time.LocalDateTime
 
 import play.api.libs.json.Json
 
-// TODO this may be redundate HttpResponse would be fine i think
+// TODO this may be redundant (using HttpResponse) for now, although we should check the response against the schema
 
 case class BackendResponse (
   outcome: String,
