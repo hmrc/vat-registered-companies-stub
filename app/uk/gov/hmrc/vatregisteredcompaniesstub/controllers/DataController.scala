@@ -33,7 +33,7 @@ class DataController @Inject()(implicit executionContext: ExecutionContext)
 
   def triggerPost(): Action[AnyContent] = Action.async { implicit request =>
     val payload: Payload = DataGenerator.generateData
-    JsonSchemaChecker[Payload](payload, "mdg-payload")
+    JsonSchemaChecker[Payload](payload, "mdg-payload") // TODO consider moving schema checking to unit tests
 
     bePost[Payload, HttpResponse]("/vatregistrations", payload).map{ res =>
       println(res.status) // TODO set up BE endpoint to post to
