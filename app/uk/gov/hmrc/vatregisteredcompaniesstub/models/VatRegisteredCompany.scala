@@ -34,15 +34,6 @@ object Address {
     Json.format[Address]
 }
 
-//case class VatNumber(
-//  vatNumber: String
-//)
-//
-//object VatNumber {
-//  implicit val vatNumberFormat: OFormat[VatNumber] =
-//    Json.format[VatNumber]
-//}
-
 case class VatRegisteredCompany(
   name: CompanyName,
   vatNumber: VatNumber,

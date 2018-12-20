@@ -18,16 +18,17 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
 import java.time.LocalDateTime
 
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 
 // TODO this may be redundant (using HttpResponse) for now, although we should check the response against the schema
 
-case class BackendResponse (
+case class PayloadSubmissionResponse (
   outcome: String,
   processingDate: LocalDateTime,
   code: Option[String]
 )
 
-object BackendResponse {
-  implicit val backendResponseFormat = Json.format[BackendResponse]
+object PayloadSubmissionResponse {
+  implicit val backendResponseFormat: OFormat[PayloadSubmissionResponse] =
+    Json.format[PayloadSubmissionResponse]
 }
