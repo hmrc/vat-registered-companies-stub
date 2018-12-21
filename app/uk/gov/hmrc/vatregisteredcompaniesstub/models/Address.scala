@@ -18,17 +18,17 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class VatRegisteredCompany(
-  name: CompanyName,
-  vatNumber: VatNumber,
-  address: Address
+case class Address(
+  line1: String,
+  line2: Option[String],
+  line3: Option[String],
+  line4: Option[String],
+  line5: Option[String],
+  postcode: Option[String],
+  countryCode: String
 )
 
-object VatRegisteredCompany {
-  implicit val vatRegisteredCompanyFormat: OFormat[VatRegisteredCompany] =
-    Json.format[VatRegisteredCompany]
+object Address {
+  implicit val addressFormat: OFormat[Address] =
+    Json.format[Address]
 }
-
-
-
-

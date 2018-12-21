@@ -19,28 +19,26 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent}
-import uk.gov.hmrc.http.HttpResponse
-import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
 import uk.gov.hmrc.play.microservice.controller.BaseController
-import uk.gov.hmrc.vatregisteredcompaniesstub.models.Payload
+import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
+import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmissionResponse}
 import uk.gov.hmrc.vatregisteredcompaniesstub.services.{DataGenerator, JsonSchemaChecker}
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 @Singleton
 class DataController @Inject()(implicit executionContext: ExecutionContext)
   extends BaseController with BackendConnector {
 
+  // TODO create more fine grained posts... those that update existing, those that delete etc.
+
   def triggerPost(): Action[AnyContent] = Action.async { implicit request =>
     val payload: Payload = DataGenerator.generateData
-    JsonSchemaChecker[Payload](payload, "mdg-payload") // TODO consider moving schema checking to unit tests
-
-    bePost[Payload, HttpResponse]("/vatregistrations", payload).map{ res =>
-      println(res.status) // TODO set up BE endpoint to post to
-      // TODO check the schema of the response against our response schema!
+    JsonSchemaChecker[Payload](payload, "mdg-payload")
+    bePost[Payload, PayloadSubmissionResponse]("/vat-registered-companies/vatregistrations", payload).map{ res =>
+      JsonSchemaChecker[PayloadSubmissionResponse](res, "be-response")
+      Ok(Json.toJson(res).toString())
     }
-
-    Future.successful(Ok(Json.toJson(payload).toString()))
   }
 
 }
