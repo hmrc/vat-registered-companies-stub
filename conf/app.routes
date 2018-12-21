@@ -1,6 +1,4 @@
 # microservice specific routes
 
-GET        /hello-world             uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld.hello
-
-# TODO make sure this is only accessed by testOnlyRoutes on the FE and BE
-GET        /trigger-mdg-data-post   uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost
+GET        /trigger-mdg-data-post       uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost
+GET        /trigger-mdg-data-update     uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerUpdate

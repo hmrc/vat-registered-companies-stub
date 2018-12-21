@@ -23,6 +23,8 @@ import play.api.mvc._
 
 import scala.concurrent.Future
 
+// TODO remove this (and it's routing)
+
 @Singleton
 class MicroserviceHelloWorld extends BaseController {
 
