@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.services
 import cats.implicits._
 import org.scalacheck.Gen
 import uk.gov.hmrc.smartstub._
-import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatRegisteredCompany}
+import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatNumber, VatRegisteredCompany}
 
 
 object DataGenerator {

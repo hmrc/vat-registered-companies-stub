@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.models
 import play.api.libs.json.{Json, OFormat}
 
 case class Payload(
-  createsAndUpdates: List[VatRegisteredCompany],
-  deletes: List[VatNumber]
+  createsAndUpdates: List[VatRegisteredCompany] = List.empty[VatRegisteredCompany],
+  deletes: List[VatNumber] = List.empty[VatNumber]
 )
 
 object Payload {
