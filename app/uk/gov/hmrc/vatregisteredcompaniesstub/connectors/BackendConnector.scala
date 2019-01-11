@@ -18,12 +18,11 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
 //import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
-import com.typesafe.config.Config
 import javax.inject.Singleton
 import play.api.libs.json.Writes
 import uk.gov.hmrc.http.hooks.HttpHook
 import uk.gov.hmrc.http.logging.Authorization
-import uk.gov.hmrc.http.{HeaderCarrier, HttpPost, HttpReads, HttpResponse}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpPost, HttpReads}
 import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.play.http.ws.WSPost
 
