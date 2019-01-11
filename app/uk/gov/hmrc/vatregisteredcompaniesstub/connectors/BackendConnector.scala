@@ -42,10 +42,7 @@ trait BackendConnector extends ServicesConfig {
     http.POST[I, O](s"$serviceURL$url", body)(wts, rds, addHeaders, ec)
 
   def addHeaders(implicit hc: HeaderCarrier): HeaderCarrier = {
-//    hc.withExtraHeaders(
-//      "Environment" -> getConfString("des.environment", "")
-//    ).copy(authorization = Some(Authorization(s"Bearer ${getConfString("des.token", "")}")))
-    hc // TODO we will need to pass a token to the BE to authenticate - see soft-drinks-industry-levy DesHelpers & application.conf
+    hc.copy(authorization = Some(Authorization(s"Bearer ${getConfString("vat-registered-companies.token", "")}")))
   }
 
 }

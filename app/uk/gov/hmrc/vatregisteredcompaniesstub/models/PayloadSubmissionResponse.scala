@@ -20,8 +20,6 @@ import java.time.LocalDateTime
 
 import play.api.libs.json.{Json, OFormat}
 
-// TODO this may be redundant (using HttpResponse) for now, although we should check the response against the schema
-
 case class PayloadSubmissionResponse (
   outcome: String,
   processingDate: LocalDateTime,

@@ -16,14 +16,9 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub
 
-import play.api.libs.json.{Json, OFormat}
-
 package object models {
 
-  // TODO figure out if these type alias' are advantageous or not
   type CompanyName = String
   type VatNumber = String
-
-
 
 }

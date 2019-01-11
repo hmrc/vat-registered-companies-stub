@@ -19,7 +19,7 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.services
 import cats.implicits._
 import org.scalacheck.Gen
 import uk.gov.hmrc.smartstub._
-import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatNumber, VatRegisteredCompany}
+import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatRegisteredCompany}
 
 
 object DataGenerator {
@@ -59,6 +59,6 @@ object DataGenerator {
     b <- Gen.choose(minElements, maxElements).flatMap(Gen.listOfN(_, vatNumber))
   } yield Payload(a, b)
 
-  def generateData: Payload = payload.seeded(1L).get // TODO figure out what the seed should be
+  def generateData: Payload = payload.seeded(1L).get
 
 }
