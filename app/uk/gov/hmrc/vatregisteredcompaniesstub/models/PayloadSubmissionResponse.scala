@@ -17,6 +17,7 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
 import java.time.{LocalDateTime, ZoneId}
+//import enumeratum._
 
 import play.api.libs.json.{Json, OFormat}
 
@@ -28,6 +29,20 @@ case class PayloadSubmissionResponse(
 object PayloadSubmissionResponse {
   implicit val backendResponseFormat: OFormat[PayloadSubmissionResponse] =
     Json.format[PayloadSubmissionResponse]
+
+//  sealed trait Outcome extends EnumEntry
+//  object Outcome extends PlayEnum[Outcome] {
+//    val values = findValues
+//    case object SUCCESS extends Outcome
+//    case object FAILURE extends Outcome
+//  }
+//
+//  sealed trait Code extends EnumEntry
+//  object Code extends PlayEnum[Code] {
+//    val values = findValues
+//    case object INVALID_PAYLOAD extends Code
+//    case object SERVER_ERROR extends Code
+//  }
 
   object Outcome extends Enumeration {
     val SUCCESS, FAILURE = Value

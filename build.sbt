@@ -24,7 +24,6 @@ libraryDependencies ++= Seq(
   "org.scalatest"           %% "scalatest"               % "3.0.5",
   "org.scalatestplus.play"  %% "scalatestplus-play"      % "2.0.1",
   "uk.gov.hmrc"             %% "hmrctest"                % "3.0.0"
-  // TODO get enumeratum, see uniform import
 ).map(_ % "test")
 
 // ================================================================================
@@ -40,6 +39,9 @@ libraryDependencies ++= Seq(
   "uk.gov.hmrc"             %% "microservice-bootstrap"  % "6.18.0",
   "uk.gov.hmrc"             %% "play-ui"                 % "7.22.0",
   "uk.gov.hmrc"             %% "stub-data-generator"     % "0.5.3"
+  //,
+  //"com.beachape"            %% "enumeratum"              % "1.5.13",
+  //"com.beachape"            %% "enumeratum-play"         % "1.5.13"
 )
 
 resolvers ++= Seq(
