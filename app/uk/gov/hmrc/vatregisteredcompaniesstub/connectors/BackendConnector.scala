@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
-//import uk.gov.hmrc.play.bootstrap.http.HttpClient
-
 import javax.inject.Singleton
 import play.api.libs.json.Writes
 import uk.gov.hmrc.http.hooks.HttpHook

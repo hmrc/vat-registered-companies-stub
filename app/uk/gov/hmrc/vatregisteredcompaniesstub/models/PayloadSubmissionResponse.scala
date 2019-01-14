@@ -16,17 +16,25 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
-import java.time.LocalDateTime
+import java.time.{LocalDateTime, ZoneId}
 
 import play.api.libs.json.{Json, OFormat}
 
-case class PayloadSubmissionResponse (
-  outcome: String,
-  processingDate: LocalDateTime,
-  code: Option[String]
-)
+case class PayloadSubmissionResponse(
+  outcome: PayloadSubmissionResponse.Outcome.Value,
+  code: Option[PayloadSubmissionResponse.Code.Value],
+  processingDate: ProcessingDate = LocalDateTime.now(ZoneId.of("Europe/London")))
 
 object PayloadSubmissionResponse {
   implicit val backendResponseFormat: OFormat[PayloadSubmissionResponse] =
     Json.format[PayloadSubmissionResponse]
+
+  object Outcome extends Enumeration {
+    val SUCCESS, FAILURE = Value
+  }
+
+  object Code extends Enumeration {
+    val INVALID_PAYLOAD, SERVER_ERROR = Value
+  }
+
 }

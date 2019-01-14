@@ -24,6 +24,7 @@ libraryDependencies ++= Seq(
   "org.scalatest"           %% "scalatest"               % "3.0.5",
   "org.scalatestplus.play"  %% "scalatestplus-play"      % "2.0.1",
   "uk.gov.hmrc"             %% "hmrctest"                % "3.0.0"
+  // TODO get enumeratum, see uniform import
 ).map(_ % "test")
 
 // ================================================================================
