@@ -1,3 +1,4 @@
 # microservice specific routes
 
-GET        /hello-world             uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld.hello
+GET        /trigger-mdg-data-post       uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost
+GET        /trigger-mdg-data-update     uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerUpdate

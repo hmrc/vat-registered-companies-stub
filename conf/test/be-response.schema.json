@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UK VAT Checker data importer response",
+  "description": "response from UK VAT Checker data create/update/delete request",
+  "type": "object",
+  "oneOf": [
+    {"$ref": "#/definitions/success"},
+    {"$ref": "#/definitions/failure"}
+  ],
+  "definitions": {
+    "success": {
+      "type": "object",
+      "required": ["outcome", "processingDate"],
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/successOutcome"
+        },
+        "processingDate": {
+          "$ref": "#/definitions/processingDate"
+        }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "required": ["outcome", "processingDate", "code"],
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/failureOutcome"
+        },
+        "processingDate": {
+          "$ref": "#/definitions/processingDate"
+        },
+        "code": {
+          "$ref": "#/definitions/code"
+        }
+      }
+    },
+    "successOutcome": {
+      "type": "string",
+      "enum": [
+        "SUCCESS"
+      ]
+    },
+    "failureOutcome": {
+      "type": "string",
+      "enum": [
+        "FAILURE"
+      ]
+    },
+    "processingDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "INVALID_PAYLOAD",
+        "SERVER_ERROR",
+        "SERVICE_UNAVAILABLE"
+      ]
+    }
+  }
+}

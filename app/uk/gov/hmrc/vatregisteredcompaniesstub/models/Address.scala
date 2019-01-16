@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
+package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
-import javax.inject.Singleton
-import uk.gov.hmrc.play.microservice.controller.BaseController
-import uk.gov.hmrc.play.http.logging.MdcLoggingExecutionContext._
-import play.api.mvc._
+import play.api.libs.json.{Json, OFormat}
 
-import scala.concurrent.Future
+case class Address(
+  line1: String,
+  line2: Option[String],
+  line3: Option[String],
+  line4: Option[String],
+  line5: Option[String],
+  postcode: Option[String],
+  countryCode: String
+)
 
-@Singleton
-class MicroserviceHelloWorld extends BaseController {
-
-	def hello() = Action.async { implicit request =>
-		Future.successful(Ok("Hello world"))
-	}
-
+object Address {
+  implicit val addressFormat: OFormat[Address] =
+    Json.format[Address]
 }
