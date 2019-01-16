@@ -17,7 +17,6 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
 import java.time.{LocalDateTime, ZoneId}
-//import enumeratum._
 
 import play.api.libs.json.{Json, OFormat}
 
