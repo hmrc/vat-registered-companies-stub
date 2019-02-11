@@ -36,7 +36,6 @@ libraryDependencies ++= Seq(
   "com.github.fge"          %  "json-schema-validator"   % "2.2.6",
   "org.scalacheck"          %% "scalacheck"              % "1.14.0",
   "uk.gov.hmrc"             %% "domain"                  % "5.3.0",
-//  "uk.gov.hmrc"             %% "microservice-bootstrap"  % "10.3.0",
   "uk.gov.hmrc"             %% "play-ui"                 % "7.31.0-play-25",
   "uk.gov.hmrc"             %% "stub-data-generator"     % "0.5.3",
   "uk.gov.hmrc"             %% "bootstrap-play-25"       % "4.8.0"
