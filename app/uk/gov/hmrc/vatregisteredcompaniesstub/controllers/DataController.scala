@@ -17,9 +17,11 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 
 import javax.inject.{Inject, Singleton}
+import play.api.{Configuration, Environment}
+import play.api.Mode.Mode
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, Request, Result}
-import uk.gov.hmrc.play.microservice.controller.BaseController
+import uk.gov.hmrc.play.bootstrap.controller.BaseController
 import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmissionResponse}
 import uk.gov.hmrc.vatregisteredcompaniesstub.services.{DataGenerator, JsonSchemaChecker}
@@ -27,11 +29,11 @@ import uk.gov.hmrc.vatregisteredcompaniesstub.services.{DataGenerator, JsonSchem
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class DataController @Inject()(implicit executionContext: ExecutionContext)
-  extends BaseController with BackendConnector {
+class DataController @Inject()(backendConnector: BackendConnector)(implicit executionContext: ExecutionContext)
+  extends BaseController {
 
   private def send(payload: Payload)(implicit request: Request[AnyContent]): Future[Result] =
-    bePost[Payload, PayloadSubmissionResponse]("/vat-registered-companies/vatregistrations", payload).map{ res =>
+    backendConnector.bePost[Payload, PayloadSubmissionResponse]("/vat-registered-companies/vatregistrations", payload).map{ res =>
       JsonSchemaChecker[PayloadSubmissionResponse](res, "be-response")
       Ok(Json.toJson(res).toString())
     }
@@ -56,6 +58,5 @@ class DataController @Inject()(implicit executionContext: ExecutionContext)
     val updatedPayload = Payload(updates, deletes)
     send(updatedPayload)
   }
-
 
 }

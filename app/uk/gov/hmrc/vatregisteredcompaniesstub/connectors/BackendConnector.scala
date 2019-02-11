@@ -16,22 +16,23 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
-import javax.inject.Singleton
+import javax.inject.{Inject, Singleton}
+import play.api.Mode.Mode
 import play.api.libs.json.Writes
-import uk.gov.hmrc.http.hooks.HttpHook
+import play.api.{Configuration, Environment}
 import uk.gov.hmrc.http.logging.Authorization
-import uk.gov.hmrc.http.{HeaderCarrier, HttpPost, HttpReads}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import uk.gov.hmrc.play.config.ServicesConfig
-import uk.gov.hmrc.play.http.ws.WSPost
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-trait BackendConnector extends ServicesConfig {
-
-  val http: HttpPost = new HttpPost with WSPost {
-    override val hooks: Seq[HttpHook] = NoneRequired
-  }
+class BackendConnector @Inject()(
+  http: HttpClient,
+  environment: Environment,
+  configuration: Configuration
+) extends ServicesConfig {
 
   val serviceURL: String = baseUrl("vat-registered-companies")
 
@@ -42,7 +43,11 @@ trait BackendConnector extends ServicesConfig {
     hc.copy(authorization = Some(Authorization(s"Bearer ${getConfString("vat-registered-companies.token", "")}")))
   }
 
+  override protected def mode: Mode = environment.mode
+
+  override protected def runModeConfiguration: Configuration = configuration
 }
+
 
 
 
