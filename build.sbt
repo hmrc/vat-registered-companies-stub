@@ -89,7 +89,6 @@ scalacOptions ++= Seq(
 // Misc
 // ================================================================================
 
-initialCommands in Test := "import uk.gov.hmrc.vatregisteredcompaniesstub.controllers.MicroserviceHelloWorld"
 majorVersion := 0
 uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 
