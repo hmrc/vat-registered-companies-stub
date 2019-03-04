@@ -35,7 +35,7 @@ object DataGenerator {
     vatNumber <- Gen.oneOf(short, long)
   } yield vatNumber
 
-  private def address: Gen[Address] = Gen.ukAddress.map{ x =>
+  private def address: Gen[Address] = Gen.ukAddress.retryUntil(a => a.forall(b => b.length < 36)).map { x =>
     val lines = x.dropRight(2)
     Address(
       lines.head,
