@@ -24,10 +24,10 @@ import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatRegis
 
 object DataGenerator {
 
-  private val minElements = 0
-  private val maxElements = 1000
+  private val minElements = 39000
+  private val maxElements = 40000
 
-  private def companyName: Gen[String] = Gen.company
+  private def companyName: Gen[String] = Gen.company.retryUntil(a => a.length < 105 && a.length > 1)
 
   private def vatNumber: Gen[String] = for {
     short <- pattern"999999999"
@@ -35,7 +35,7 @@ object DataGenerator {
     vatNumber <- Gen.oneOf(short, long)
   } yield vatNumber
 
-  private def address: Gen[Address] = Gen.ukAddress.retryUntil(a => a.forall(b => b.length < 36)).map { x =>
+  private def address: Gen[Address] = Gen.ukAddress.retryUntil(a => a.forall(b => b.length < 36 && b.length > 1)).map { x =>
     val lines = x.dropRight(2)
     Address(
       lines.head,
@@ -56,9 +56,17 @@ object DataGenerator {
 
   private def payload: Gen[Payload] = for {
     a <- Gen.choose(minElements, maxElements).flatMap(Gen.listOfN(_, vatRegisteredCompany))
-    b <- Gen.choose(minElements, maxElements).flatMap(Gen.listOfN(_, vatNumber))
+    b <- Gen.choose(0, 0).flatMap(Gen.listOfN(_, vatNumber))
   } yield Payload(a, b)
 
   def generateData: Payload = payload.seeded(1L).get
+
+  def updatedPayload: Payload = {
+    val payload: Payload = DataGenerator.generateData
+    Payload(
+      payload.createsAndUpdates.take(10000).map(_.copy(name = "foo")),
+      payload.createsAndUpdates.takeRight(20000).map(_.vatNumber)
+    )
+  }
 
 }

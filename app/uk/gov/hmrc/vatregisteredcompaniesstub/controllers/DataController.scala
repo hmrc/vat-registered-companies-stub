@@ -17,8 +17,6 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.{Configuration, Environment}
-import play.api.Mode.Mode
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, Request, Result}
 import uk.gov.hmrc.play.bootstrap.controller.BaseController
@@ -52,11 +50,7 @@ class DataController @Inject()(backendConnector: BackendConnector)(implicit exec
     * Sends an update to the initial import; some changes, some deletes.
     */
   def triggerUpdate: Action[AnyContent] = Action.async { implicit request =>
-    val payload: Payload = DataGenerator.generateData
-    val updates = payload.createsAndUpdates.take(10).map(_.copy(name = "foo"))
-    val deletes = payload.createsAndUpdates.takeRight(10).map(_.vatNumber)
-    val updatedPayload = Payload(updates, deletes)
-    send(updatedPayload)
+    send(DataGenerator.updatedPayload)
   }
 
 }
