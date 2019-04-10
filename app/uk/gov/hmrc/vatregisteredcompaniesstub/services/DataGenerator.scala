@@ -21,13 +21,13 @@ import org.scalacheck.Gen
 import uk.gov.hmrc.smartstub._
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatRegisteredCompany}
 
-
 object DataGenerator {
 
   private val minElements = 39000
   private val maxElements = 40000
 
-  private def companyName: Gen[String] = Gen.company.retryUntil(a => a.length < 105 && a.length > 1)
+  private def companyName: Gen[String] =
+    Gen.company.retryUntil(_.length > 1).map(_.take(105))
 
   private def vatNumber: Gen[String] = for {
     short <- pattern"999999999"
@@ -35,15 +35,14 @@ object DataGenerator {
     vatNumber <- Gen.oneOf(short, long)
   } yield vatNumber
 
-  private def address: Gen[Address] = Gen.ukAddress.retryUntil(a => a.forall(b => b.length < 36 && b.length > 1)).map { x =>
-    val lines = x.dropRight(2)
+  private def address: Gen[Address] = Gen.ukAddress.map { lines =>
     Address(
-      lines.head,
-      lines.get(1),
-      lines.get(2),
-      lines.get(3),
-      lines.get(4),
-      x.last.some,
+      lines.head.take(35),
+      lines.get(1).map(_.take(35)),
+      lines.get(2).map(_.take(35)),
+      lines.get(3).map(_.take(35)),
+      lines.get(4).map(_.take(35)),
+      lines.last.some,
       "GB"
     )
   }
