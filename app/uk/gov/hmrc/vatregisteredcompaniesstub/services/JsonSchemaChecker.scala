@@ -44,7 +44,7 @@ object JsonSchemaChecker {
     if (!processingReport.isSuccess) processingReport.foreach {
       x =>
         Logger.warn(
-          s"failed to validate against json schema, schema: ${x.asJson().get("schema")}, " +
+          s"failed to validate against json schema $file, schema: ${x.asJson().get("schema")}, " +
             s"instance: ${x.asJson().get("instance")}, problem: ${x.asJson().get("keyword")}"
         )
     }

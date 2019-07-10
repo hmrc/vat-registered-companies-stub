@@ -1,4 +1,4 @@
 # microservice specific routes
 
-GET        /trigger-mdg-data-post       uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost
-GET        /trigger-mdg-data-update     uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerUpdate
+GET        /trigger-mdg-data-post/:seed          uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerPost(seed: String)
+GET        /trigger-mdg-data-update        uk.gov.hmrc.vatregisteredcompaniesstub.controllers.DataController.triggerUpdate
