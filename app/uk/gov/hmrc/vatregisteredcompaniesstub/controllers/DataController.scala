@@ -40,8 +40,8 @@ class DataController @Inject()(backendConnector: BackendConnector)(implicit exec
     * Sends an initial data import to the BE service - can be run many times.
     * @return
     */
-  def triggerPost: Action[AnyContent] = Action.async { implicit request =>
-    val payload: Payload = DataGenerator.generateData
+  def triggerPost(seed: String): Action[AnyContent] = Action.async { implicit request =>
+    val payload: Payload = DataGenerator.generateData(seed.toLong)
     JsonSchemaChecker[Payload](payload, "mdg-payload")
     send(payload)
   }

@@ -59,10 +59,10 @@ object DataGenerator {
     b <- Gen.choose(0, 0).flatMap(Gen.listOfN(_, vatNumber))
   } yield Payload(a, b)
 
-  def generateData: Payload = payload.seeded(1L).get
+  def generateData(seed: Long): Payload = payload.seeded(seed).get
 
   def updatedPayload: Payload = {
-    val payload: Payload = DataGenerator.generateData
+    val payload: Payload = DataGenerator.generateData(1L)
     Payload(
       payload.createsAndUpdates.take(10000).map(_.copy(name = "foo")),
       payload.createsAndUpdates.takeRight(20000).map(_.vatNumber)
