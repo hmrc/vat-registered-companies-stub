@@ -17,13 +17,12 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
 import javax.inject.{Inject, Singleton}
-import play.api.Mode.Mode
 import play.api.libs.json.Writes
 import play.api.{Configuration, Environment}
 import uk.gov.hmrc.http.logging.Authorization
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
-import uk.gov.hmrc.play.config.ServicesConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -31,21 +30,18 @@ import scala.concurrent.{ExecutionContext, Future}
 class BackendConnector @Inject()(
   http: HttpClient,
   environment: Environment,
-  configuration: Configuration
-) extends ServicesConfig {
+  configuration: Configuration,
+  servicesConfig: ServicesConfig
+) {
 
-  val serviceURL: String = baseUrl("vat-registered-companies")
+  val serviceURL: String = servicesConfig.baseUrl("vat-registered-companies")
 
   def bePost[I, O](url: String, body: I)(implicit wts: Writes[I], rds: HttpReads[O], hc: HeaderCarrier, ec: ExecutionContext): Future[O] =
     http.POST[I, O](s"$serviceURL$url", body)(wts, rds, addHeaders, ec)
 
   def addHeaders(implicit hc: HeaderCarrier): HeaderCarrier = {
-    hc.copy(authorization = Some(Authorization(s"Bearer ${getConfString("vat-registered-companies.token", "")}")))
+    hc.copy(authorization = Some(Authorization(s"Bearer ${servicesConfig.getConfString("vat-registered-companies.token", "")}")))
   }
-
-  override protected def mode: Mode = environment.mode
-
-  override protected def runModeConfiguration: Configuration = configuration
 }
 
 
