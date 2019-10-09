@@ -23,7 +23,6 @@ libraryDependencies ++= Seq(
   "org.pegdown"             %  "pegdown"                 % "1.6.0",
   "org.scalatest"           %% "scalatest"               % "3.0.5",
   "org.scalatestplus.play"  %% "scalatestplus-play"      % "3.1.2"
-//  "uk.gov.hmrc"             %% "hmrctest"                % "3.4.0-play-25"
 ).map(_ % "test")
 
 // ================================================================================
