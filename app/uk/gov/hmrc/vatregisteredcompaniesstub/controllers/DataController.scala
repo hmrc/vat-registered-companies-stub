@@ -18,8 +18,8 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, Request, Result}
-import uk.gov.hmrc.play.bootstrap.controller.BaseController
+import play.api.mvc._
+import uk.gov.hmrc.play.bootstrap.controller.{BackendController, BaseController}
 import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmissionResponse}
 import uk.gov.hmrc.vatregisteredcompaniesstub.services.{DataGenerator, JsonSchemaChecker}
@@ -27,8 +27,13 @@ import uk.gov.hmrc.vatregisteredcompaniesstub.services.{DataGenerator, JsonSchem
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class DataController @Inject()(backendConnector: BackendConnector)(implicit executionContext: ExecutionContext)
-  extends BaseController {
+class DataController @Inject()
+(
+  backendConnector: BackendConnector,
+  cc: ControllerComponents
+)(
+  implicit executionContext: ExecutionContext
+) extends BackendController(cc) {
 
   private def send(payload: Payload)(implicit request: Request[AnyContent]): Future[Result] =
     backendConnector.bePost[Payload, PayloadSubmissionResponse]("/vat-registered-companies/vatregistrations", payload).map{ res =>
