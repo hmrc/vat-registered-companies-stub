@@ -1,3 +1,4 @@
+import sbt.compilerPlugin
 // ================================================================================
 // Plugins
 // ================================================================================
@@ -19,9 +20,7 @@ libraryDependencies ++= Seq(
   "org.mockito"             %  "mockito-core"            % "2.24.0",
   "org.pegdown"             %  "pegdown"                 % "1.6.0",
   "org.scalatest"           %% "scalatest"               % "3.0.9",
-  "org.scalatestplus.play"  %% "scalatestplus-play"      % "3.1.2",
-  //"com.github.ghik"         %  "silencer-plugin"         % "1.7.5" cross CrossVersion.full,
-  //"com.github.ghik"         %  "silencer-lib"            % "1.7.5" % Provided cross CrossVersion.full
+  "org.scalatestplus.play"  %% "scalatestplus-play"      % "3.1.2"
 ).map(_ % "test")
 
 // ================================================================================
@@ -37,8 +36,8 @@ libraryDependencies ++= Seq(
   "uk.gov.hmrc"             %% "play-ui"                 % "9.6.0-play-26",
   "uk.gov.hmrc"             %% "stub-data-generator"     % "0.5.3",
   "uk.gov.hmrc"             %% "bootstrap-play-26"       % "4.0.0",
-  //"com.github.ghik"         %  "silencer-plugin"         % "1.7.5" cross CrossVersion.full,
-  //"com.github.ghik"         %  "silencer-lib"            % "1.7.5" % Provided cross CrossVersion.full
+  compilerPlugin("com.github.ghik"          % "silencer-plugin" % "1.7.5" cross CrossVersion.full),
+  "com.github.ghik" % "silencer-lib" % "1.7.5" % Provided cross CrossVersion.full
 )
 
 // ================================================================================
@@ -77,8 +76,8 @@ scalacOptions ++= Seq(
   "-Ywarn-numeric-widen",              // Warn when numerics are widened.
   "-Ywarn-unused",                     // Warn if an import selector is not referenced.
   "-Ywarn-value-discard",              // Warn when non-Unit expression results are unused.
-  //"-P:silencer:pathFilters=routes",
-  //"-P:silencer:globalFilters=Unused import"
+  "-P:silencer:pathFilters=routes",
+  "-P:silencer:globalFilters=Unused import"
 )
 
 // ================================================================================
