@@ -18,8 +18,7 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Writes
-import play.api.{Configuration, Environment}
-import uk.gov.hmrc.http.logging.Authorization
+import uk.gov.hmrc.http.Authorization
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
@@ -29,8 +28,6 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class BackendConnector @Inject()(
   http: HttpClient,
-  environment: Environment,
-  configuration: Configuration,
   servicesConfig: ServicesConfig
 ) {
 

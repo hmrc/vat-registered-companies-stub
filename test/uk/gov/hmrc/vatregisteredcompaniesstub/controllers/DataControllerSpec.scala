@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 
-import org.scalatest.mockito.MockitoSugar
 import org.mockito.ArgumentMatchers._
 import org.mockito.Mockito._
+import org.scalatestplus.mockito.MockitoSugar
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
@@ -29,7 +29,6 @@ import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmission
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
 
 class DataControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite with MockitoSugar {
 

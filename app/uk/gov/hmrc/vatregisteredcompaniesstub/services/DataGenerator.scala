@@ -21,7 +21,6 @@ import org.scalacheck.Gen
 import uk.gov.hmrc.smartstub._
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Address, Payload, VatRegisteredCompany}
 
-
 object DataGenerator {
 
   private val minElements = 39000
