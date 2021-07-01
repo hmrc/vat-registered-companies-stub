@@ -22,13 +22,15 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
+import play.api.libs.json.Writes
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
 import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmissionResponse}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 class DataControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite with MockitoSugar {
 
@@ -39,9 +41,9 @@ class DataControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite
   "GET /" should {
     "return 200" in {
       when(mockBackendConnector.bePost[Payload, PayloadSubmissionResponse](
-        any(),any()
+        anyString(), any[Payload]()
       )(
-        any(), any(), any(), any()
+        any[Writes[Payload]](), any[HttpReads[PayloadSubmissionResponse]](), any[HeaderCarrier](), any[ExecutionContext]()
       )).thenReturn(
           Future.successful(
             PayloadSubmissionResponse(
