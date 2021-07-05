@@ -1,12 +1,10 @@
+import sbt.compilerPlugin
 // ================================================================================
 // Plugins
 // ================================================================================
 enablePlugins(
   play.sbt.PlayScala,
-  SbtAutoBuildPlugin,
-  SbtGitVersioning,
-  SbtDistributablesPlugin,
-  SbtArtifactory
+  SbtDistributablesPlugin
 )
 
 // ================================================================================
@@ -21,28 +19,25 @@ libraryDependencies ++= Seq(
   "com.typesafe.play"       %% "play-test"               % play.core.PlayVersion.current,
   "org.mockito"             %  "mockito-core"            % "2.24.0",
   "org.pegdown"             %  "pegdown"                 % "1.6.0",
-  "org.scalatest"           %% "scalatest"               % "3.0.5",
+  "org.scalatest"           %% "scalatest"               % "3.0.9",
   "org.scalatestplus.play"  %% "scalatestplus-play"      % "3.1.2"
 ).map(_ % "test")
 
 // ================================================================================
 // Dependencies
 // ================================================================================
-scalaVersion := "2.12.11"
+scalaVersion := "2.12.13"
 
 libraryDependencies ++= Seq(
   ws,
   "com.github.fge"          %  "json-schema-validator"   % "2.2.6",
   "org.scalacheck"          %% "scalacheck"              % "1.14.0",
-  "uk.gov.hmrc"             %% "domain"                  % "5.10.0-play-26",
-  "uk.gov.hmrc"             %% "play-ui"                 % "9.0.0-play-26",
+  "uk.gov.hmrc"             %% "domain"                  % "6.0.0-play-26",
+  "uk.gov.hmrc"             %% "play-ui"                 % "9.6.0-play-26",
   "uk.gov.hmrc"             %% "stub-data-generator"     % "0.5.3",
-  "uk.gov.hmrc"             %% "bootstrap-play-26"       % "2.0.0"
-)
-
-resolvers ++= Seq(
-  Resolver.bintrayRepo("hmrc", "releases"),
-  Resolver.jcenterRepo
+  "uk.gov.hmrc"             %% "bootstrap-play-26"       % "4.0.0",
+  compilerPlugin("com.github.ghik"          % "silencer-plugin" % "1.7.5" cross CrossVersion.full),
+  "com.github.ghik" % "silencer-lib" % "1.7.5" % Provided cross CrossVersion.full
 )
 
 // ================================================================================
@@ -50,7 +45,6 @@ resolvers ++= Seq(
 // ================================================================================
 
 scalacOptions ++= Seq(
-//  "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.  
   "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
   "-encoding", "utf-8",                // Specify character encoding used by source files.
   "-explaintypes",                     // Explain type errors in more detail.
@@ -81,14 +75,16 @@ scalacOptions ++= Seq(
   "-Ywarn-nullary-unit",               // Warn when nullary methods return Unit.
   "-Ywarn-numeric-widen",              // Warn when numerics are widened.
   "-Ywarn-unused",                     // Warn if an import selector is not referenced.
-  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
+  "-Ywarn-value-discard",              // Warn when non-Unit expression results are unused.
+  "-P:silencer:pathFilters=routes",
+  "-P:silencer:globalFilters=Unused import"
 )
 
 // ================================================================================
 // Misc
 // ================================================================================
 
-majorVersion := 0
+majorVersion := 1
 uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 
 
