@@ -18,8 +18,9 @@ package uk.gov.hmrc.vatregisteredcompaniesstub.controllers
 
 import org.mockito.ArgumentMatchers._
 import org.mockito.Mockito._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar
-import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.libs.json.Writes
@@ -32,7 +33,7 @@ import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmission
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 
-class DataControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite with MockitoSugar {
+class DataControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSuite with MockitoSugar {
 
   val fakeRequest = FakeRequest("GET", "/")
   val mockBackendConnector = mock[BackendConnector]
