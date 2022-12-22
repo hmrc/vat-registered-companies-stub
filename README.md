@@ -1,7 +1,9 @@
 
 # vat-registered-companies-stub
 
-This is a placeholder README.md for a new repository
+These are the stubs for the VAT checker service.
+To run services in service manager run
+sm --start VAT_REG_CO_ALL
 
 ### License
 
