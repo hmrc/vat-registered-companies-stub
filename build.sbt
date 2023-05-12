@@ -37,7 +37,9 @@ libraryDependencies ++= Seq(
   "com.github.fge"                             %  "json-schema-validator"     % "2.2.6",
   "uk.gov.hmrc"                                %% "domain"                    % "8.3.0-play-28",
   "uk.gov.hmrc"                                %% "play-frontend-hmrc"        % "7.7.0-play-28",
+  "uk.gov.hmrc"                                %% "bootstrap-test-play-28"    % "7.15.0",
   "uk.gov.hmrc"                                %% "stub-data-generator"       % "0.5.3",
+  "uk.gov.hmrc"                                %% "bootstrap-backend-play-28" % "7.15.0",
   compilerPlugin("com.github.ghik" %  "silencer-plugin"           % "1.7.12" cross CrossVersion.full),
   "com.github.ghik"                            %  "silencer-lib"              % "1.7.12" % Provided cross CrossVersion.full,
 )
