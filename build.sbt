@@ -33,7 +33,7 @@ libraryDependencies ++= Seq(
   "com.github.fge"                             %  "json-schema-validator"     % "2.2.6",
   "org.scalacheck"                             %% "scalacheck"                % "1.17.0",
   "uk.gov.hmrc"                                %% "domain"                    % "8.1.0-play-28",
-  "uk.gov.hmrc"                                %% "play-ui"                   % "9.11.0-play-28",
+  "uk.gov.hmrc"                                %% "play-frontend-hmrc"        % "7.7.0-play-28",
   "uk.gov.hmrc"                                %% "stub-data-generator"       % "0.5.3",
   "uk.gov.hmrc"                                %% "bootstrap-backend-play-28" % "7.8.0",
   compilerPlugin("com.github.ghik" %  "silencer-plugin"           % "1.7.11" cross CrossVersion.full),
