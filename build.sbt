@@ -30,7 +30,7 @@ libraryDependencies ++= Seq(
 // ================================================================================
 // Dependencies
 // ================================================================================
-scalaVersion := "2.12.13"
+scalaVersion := "2.13.8"
 
 libraryDependencies ++= Seq(
   ws,
@@ -38,7 +38,7 @@ libraryDependencies ++= Seq(
   "uk.gov.hmrc"                                %% "domain"                    % "8.3.0-play-28",
   "uk.gov.hmrc"                                %% "play-frontend-hmrc"        % "7.7.0-play-28",
   "uk.gov.hmrc"                                %% "bootstrap-test-play-28"    % "7.15.0",
-  "uk.gov.hmrc"                                %% "stub-data-generator"       % "0.5.3",
+  "uk.gov.hmrc"                                %% "stub-data-generator"       % "1.1.0",
   "uk.gov.hmrc"                                %% "bootstrap-backend-play-28" % "7.15.0",
   compilerPlugin("com.github.ghik" %  "silencer-plugin"           % "1.7.12" cross CrossVersion.full),
   "com.github.ghik"                            %  "silencer-lib"              % "1.7.12" % Provided cross CrossVersion.full,
@@ -56,13 +56,11 @@ scalacOptions ++= Seq(
   "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
   "-Xcheckinit",                       // Wrap field accessors to throw an exception on uninitialized access.
   "-Xlint:adapted-args",               // Warn if an argument list is modified to match the receiver.
-  "-Xlint:by-name-right-associative",  // By-name parameter of right associative operator.
   "-Xlint:delayedinit-select",         // Selecting member of DelayedInit.
   "-Xlint:doc-detached",               // A Scaladoc comment appears to be detached from its element.
   "-Xlint:inaccessible",               // Warn about inaccessible types in method signatures.
   "-Xlint:infer-any",                  // Warn when a type argument is inferred to be `Any`.
   "-Xlint:missing-interpolator",       // A string literal appears to be missing an interpolator id.
-  "-Xlint:nullary-override",           // Warn when non-nullary `def f()' overrides nullary `def f'.
   "-Xlint:nullary-unit",               // Warn when nullary methods return Unit.
   "-Xlint:option-implicit",            // Option.apply used implicit view.
   "-Xlint:package-object-classes",     // Class or object defined in package object.
@@ -70,13 +68,7 @@ scalacOptions ++= Seq(
   "-Xlint:private-shadow",             // A private field (or class parameter) shadows a superclass field.
   "-Xlint:stars-align",                // Pattern sequence wildcard must align with sequence component.
   "-Xlint:type-parameter-shadow",      // A local type parameter shadows a type already in scope.
-  "-Xlint:unsound-match",              // Pattern match may not be typesafe.
-  "-Yno-adapted-args",                 // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
   "-Ywarn-dead-code",                  // Warn when dead code is identified.
-  "-Ywarn-inaccessible",               // Warn about inaccessible types in method signatures.
-  "-Ywarn-infer-any",                  // Warn when a type argument is inferred to be `Any`.
-  "-Ywarn-nullary-override",           // Warn when non-nullary `def f()' overrides nullary `def f'.
-  "-Ywarn-nullary-unit",               // Warn when nullary methods return Unit.
   "-Ywarn-numeric-widen",              // Warn when numerics are widened.
   "-Ywarn-unused",                     // Warn if an import selector is not referenced.
   "-Ywarn-value-discard",              // Warn when non-Unit expression results are unused.
