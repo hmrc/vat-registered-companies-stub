@@ -11,7 +11,9 @@ object AppDependencies {
     "com.github.fge" %  "json-schema-validator"         % "2.2.6",
     "uk.gov.hmrc"    %% s"domain$playSuffix"            % "9.0.0",
     "uk.gov.hmrc"    %% s"bootstrap-backend$playSuffix" % bootstrapVersion,
-    "uk.gov.hmrc"    %% "stub-data-generator"           % "1.1.0"
+    "uk.gov.hmrc"    %% "stub-data-generator"           % "1.1.0",
+    compilerPlugin("com.github.ghik" % "silencer-plugin" % "1.7.14" cross CrossVersion.full),
+    "com.github.ghik" % "silencer-lib"                  % "1.7.14" % Provided cross CrossVersion.full
   )
 
   val test = Seq(
