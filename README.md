@@ -1,7 +1,9 @@
 
 # vat-registered-companies-stub
 
-This is a placeholder README.md for a new repository
+This is the vat-registered-companies-stub repo. It runs on port 8732.
+
+It has been upgraded to Java 11, sbt 1.9.7, Scala 2.13.12, Play 3.0.
 
 ### License
 
