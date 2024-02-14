@@ -48,9 +48,7 @@ scalacOptions ++= Seq(
   "-Ywarn-dead-code",                  // Warn when dead code is identified.
   "-Ywarn-numeric-widen",              // Warn when numerics are widened.
   "-Ywarn-unused",                     // Warn if an import selector is not referenced.
-  "-Ywarn-value-discard",              // Warn when non-Unit expression results are unused.
-  "-P:silencer:pathFilters=routes",
-  "-P:silencer:globalFilters=Unused import"
+  "-Ywarn-value-discard"              // Warn when non-Unit expression results are unused.
 )
 
 // ================================================================================
