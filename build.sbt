@@ -16,7 +16,7 @@ PlayKeys.playDefaultPort := 8732
 // Testing
 // ================================================================================
 libraryDependencies ++= Seq(
-  "com.typesafe.play"       %% "play-test"                 % play.core.PlayVersion.current,
+  "com.typesafe.play"       %% "play-test"                 % "2.8.19",
   "org.scalatestplus"       %% "mockito-3-4"               % "3.2.10.0",
   "org.pegdown"             %  "pegdown"                   % "1.6.0",
   "org.scalatest"           %% "scalatest"                 % "3.2.14",
@@ -39,10 +39,10 @@ libraryDependencies ++= Seq(
   "uk.gov.hmrc"                                %% "play-frontend-hmrc"        % "7.7.0-play-28",
   "uk.gov.hmrc"                                %% "bootstrap-test-play-28"    % "7.15.0",
   "uk.gov.hmrc"                                %% "stub-data-generator"       % "1.1.0",
-  "uk.gov.hmrc"                                %% "bootstrap-backend-play-28" % "7.15.0",
-  compilerPlugin("com.github.ghik" %  "silencer-plugin"           % "1.7.12" cross CrossVersion.full),
-  "com.github.ghik"                            %  "silencer-lib"              % "1.7.12" % Provided cross CrossVersion.full,
+  "uk.gov.hmrc"                                %% "bootstrap-backend-play-28" % "7.15.0"
 )
+
+libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
 
 // ================================================================================
 // Compiler flags
