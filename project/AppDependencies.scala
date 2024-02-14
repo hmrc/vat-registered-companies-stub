@@ -8,16 +8,15 @@ object AppDependencies {
 
   val compile = Seq(
     ws,
-    "com.github.fge" % "json-schema-validator" % "2.2.6",
-    "uk.gov.hmrc" %% s"domain$playSuffix" % "9.0.0",
-    "uk.gov.hmrc" %% s"bootstrap-backend$playSuffix" % bootstrapVersion,
-    "uk.gov.hmrc" %% s"bootstrap-test$playSuffix" % bootstrapVersion,
-    "uk.gov.hmrc" %% "stub-data-generator" % "1.1.0"
+    "com.github.fge" %  "json-schema-validator"         % "2.2.6",
+    "uk.gov.hmrc"    %% s"domain$playSuffix"            % "9.0.0",
+    "uk.gov.hmrc"    %% s"bootstrap-backend$playSuffix" % bootstrapVersion,
+    "uk.gov.hmrc"    %% "stub-data-generator"           % "1.1.0"
   )
 
   val test = Seq(
-    "org.scalatestplus" %% "scalacheck-1-17" % "3.2.17.0",
-    "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.0",
-    "uk.gov.hmrc" %% s"bootstrap-test$playSuffix" % bootstrapVersion
+    "org.scalatestplus"      %% "scalacheck-1-17"            % "3.2.17.0",
+    "org.scalatestplus.play" %% "scalatestplus-play"         % "7.0.0",
+    "uk.gov.hmrc"            %% s"bootstrap-test$playSuffix" % bootstrapVersion
   ).map(_ % "test")
 }
