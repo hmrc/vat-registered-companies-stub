@@ -17,8 +17,8 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
 import java.time.{LocalDateTime, ZoneId}
-
-import play.api.libs.json.{Json, OFormat}
+import play.api.libs.json.{Format, Json, OFormat}
+import uk.gov.hmrc.vatregisteredcompaniesstub.models.PayloadSubmissionResponse.{Code, Outcome}
 
 case class PayloadSubmissionResponse(
   outcome: PayloadSubmissionResponse.Outcome.Value,
@@ -29,12 +29,12 @@ object PayloadSubmissionResponse {
 
   object Outcome extends Enumeration {
     val SUCCESS, FAILURE = Value
-    implicit val format = EnumUtils.enumFormat(Outcome)
+    implicit val format: Format[Outcome.Value] = EnumUtils.enumFormat(Outcome)
   }
 
   object Code extends Enumeration {
     val INVALID_PAYLOAD, SERVER_ERROR = Value
-    implicit val format = EnumUtils.enumFormat(Code)
+    implicit val format: Format[Code.Value] = EnumUtils.enumFormat(Code)
   }
 
   implicit val backendResponseFormat: OFormat[PayloadSubmissionResponse] =
