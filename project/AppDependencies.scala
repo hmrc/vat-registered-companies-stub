@@ -4,11 +4,11 @@ import sbt._
 object AppDependencies {
 
   private val playVersion = "play-30"
-  private val bootstrapVersion = "8.6.0"
+  private val bootstrapVersion = "9.3.0"
 
   val compile = Seq(
     ws,
-    "uk.gov.hmrc"    %% s"domain-$playVersion"            % "9.0.0",
+    "uk.gov.hmrc"    %% s"domain-$playVersion"            % "10.0.0",
     "uk.gov.hmrc"    %% s"bootstrap-backend-$playVersion" % bootstrapVersion,
     "uk.gov.hmrc"    %% "stub-data-generator"             % "1.1.0",
     "com.github.fge" %  "json-schema-validator"           % "2.2.14",
