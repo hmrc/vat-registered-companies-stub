@@ -23,10 +23,10 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
-import play.api.libs.json.Writes
+import play.api.libs.json.{Reads, Writes}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.vatregisteredcompaniesstub.connectors.BackendConnector
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.{Payload, PayloadSubmissionResponse}
 
@@ -44,15 +44,16 @@ class DataControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSu
       when(mockBackendConnector.bePost[Payload, PayloadSubmissionResponse](
         anyString(), any[Payload]()
       )(
-        any[Writes[Payload]](), any[HttpReads[PayloadSubmissionResponse]](), any[HeaderCarrier](), any[ExecutionContext]()
+        any[Writes[Payload]](), any[Reads[PayloadSubmissionResponse]](), any[HeaderCarrier](), any[ExecutionContext]()
       )).thenReturn(
-          Future.successful(
-            PayloadSubmissionResponse(
-              PayloadSubmissionResponse.Outcome.SUCCESS,
-              None
-            )
+        Future.successful(
+          PayloadSubmissionResponse(
+            PayloadSubmissionResponse.Outcome.SUCCESS,
+            None
           )
         )
+      )
+
       val controller = new DataController(mockBackendConnector, cc)
       val result = controller.triggerUpdate(fakeRequest)
       status(result) shouldBe Status.OK
