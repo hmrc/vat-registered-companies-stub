@@ -16,28 +16,33 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.connectors
 
-import javax.inject.{Inject, Singleton}
-import play.api.libs.json.Writes
-import uk.gov.hmrc.http.Authorization
-import uk.gov.hmrc.http.{HeaderCarrier, HttpReads}
+import play.api.libs.json._
+import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, HeaderNames, HttpResponse, StringContextOps}
 import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
-import uk.gov.hmrc.http.HttpClient
 
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class BackendConnector @Inject()(
-  http: HttpClient,
+  http: HttpClientV2,
   servicesConfig: ServicesConfig
 ) {
 
   val serviceURL: String = servicesConfig.baseUrl("vat-registered-companies")
 
-  def bePost[I, O](url: String, body: I)(implicit wts: Writes[I], rds: HttpReads[O], hc: HeaderCarrier, ec: ExecutionContext): Future[O] =
-    http.POST[I, O](s"$serviceURL$url", body)(wts, rds, addHeaders, ec)
+  private def authHeader: (String, String) =
+    HeaderNames.authorisation -> s"Bearer ${servicesConfig.getConfString("vat-registered-companies.token", "")}"
 
-  def addHeaders(implicit hc: HeaderCarrier): HeaderCarrier = {
-    hc.copy(authorization = Some(Authorization(s"Bearer ${servicesConfig.getConfString("vat-registered-companies.token", "")}")))
+  def bePost[I: Writes, O: Reads](url: String, body: I)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[O] = {
+    http
+      .post(url"$serviceURL$url")
+      .withBody(Json.toJson(body))
+      .setHeader(authHeader)
+      .execute[HttpResponse]
+      .map(_.json.as[O])
   }
 }
 
