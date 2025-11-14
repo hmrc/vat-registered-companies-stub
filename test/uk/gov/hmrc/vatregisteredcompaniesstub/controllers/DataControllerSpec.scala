@@ -44,7 +44,7 @@ class DataControllerSpec extends AnyWordSpec with Matchers with GuiceOneAppPerSu
       when(mockBackendConnector.bePost[Payload, PayloadSubmissionResponse](
         anyString(), any[Payload]()
       )(
-        any[Writes[Payload]](), any[Reads[PayloadSubmissionResponse]](), any[HeaderCarrier](), any[ExecutionContext]()
+        using any[Writes[Payload]](), any[Reads[PayloadSubmissionResponse]](), any[HeaderCarrier](), any[ExecutionContext]()
       )).thenReturn(
         Future.successful(
           PayloadSubmissionResponse(
