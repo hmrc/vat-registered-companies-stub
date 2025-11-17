@@ -15,7 +15,7 @@ PlayKeys.playDefaultPort := 8732
 // ================================================================================
 // Dependencies
 // ================================================================================
-scalaVersion := "3.3.4"
+scalaVersion := "3.7.3"
 
 libraryDependencies ++= compileDependencies ++ testDependencies
 
@@ -31,8 +31,8 @@ scalacOptions ++= Seq(
   "-explaintypes",                     // Explain type errors in more detail.
   "-feature",                          // Emit warning and location for usages of features that should be imported explicitly.
   "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
-  "-Xlint:private-shadow",             // A private field (or class parameter) shadows a superclass field.
-  "-Xlint:type-parameter-shadow",      // A local type parameter shadows a type already in scope.
+  "-Wshadow:private-shadow",             // A private field (or class parameter) shadows a superclass field.
+  "-Wshadow:type-parameter-shadow",      // A local type parameter shadows a type already in scope.
   "-Wconf:msg=Flag.*repeatedly:s",
   "-Wconf:msg=unused import*:s",
   "-Wconf:msg=unused explicit parameter*:s",
