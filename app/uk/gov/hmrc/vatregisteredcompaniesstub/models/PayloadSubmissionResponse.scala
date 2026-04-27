@@ -16,14 +16,16 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub.models
 
-import java.time.{LocalDateTime, ZoneId}
-import play.api.libs.json.{Format, Json, OFormat}
+import java.time.{ZoneId, ZonedDateTime}
+import play.api.libs.json.*
 import uk.gov.hmrc.vatregisteredcompaniesstub.models.PayloadSubmissionResponse.{Code, Outcome}
+
+import java.time.format.DateTimeFormatter
 
 case class PayloadSubmissionResponse(
   outcome: PayloadSubmissionResponse.Outcome.Value,
   code: Option[PayloadSubmissionResponse.Code.Value],
-  processingDate: ProcessingDate = LocalDateTime.now(ZoneId.of("Europe/London")))
+  processingDate: ProcessingDate = ZonedDateTime.now(ZoneId.of("Europe/London")))
 
 object PayloadSubmissionResponse {
 
@@ -38,5 +40,7 @@ object PayloadSubmissionResponse {
   }
 
   implicit val backendResponseFormat: OFormat[PayloadSubmissionResponse] =
+    implicit val zdtWrites: Writes[ZonedDateTime] =
+      Writes(zdt => JsString(zdt.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)))
     Json.format[PayloadSubmissionResponse]
 }

@@ -17,34 +17,39 @@
 package uk.gov.hmrc.vatregisteredcompaniesstub.services
 
 import com.fasterxml.jackson.databind.JsonNode
-import com.github.fge.jackson.JsonLoader
-import com.github.fge.jsonschema.core.report.ProcessingReport
-import com.github.fge.jsonschema.main.JsonSchemaFactory
+import com.networknt.schema.*
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.networknt.schema.{SchemaRegistry, SpecificationVersion}
 import play.api.Logger
 import play.api.libs.json.{Format, Json}
 
 object JsonSchemaChecker {
 
   lazy val logger: Logger = Logger(this.getClass)
-  def retrieveSchema(file: String): JsonNode = schema(s"/test/$file.schema.json")
+  private val objectMapper: ObjectMapper = new ObjectMapper()
+  private val schemaRegistry: SchemaRegistry =
+    SchemaRegistry.withDefaultDialect(SpecificationVersion.DRAFT_4)
 
-  private def schema(path: String): JsonNode = {
+  def retrieveSchema(file: String): Schema = schema(s"/test/$file.schema.json")
+
+  private def schema(path: String): Schema = {
     val stream = getClass.getResourceAsStream(path)
-    val schemaText = scala.io.Source.fromInputStream(stream).getLines().mkString
+    val schemaText = scala.io.Source.fromInputStream(stream).mkString
     stream.close()
-    JsonLoader.fromString(schemaText)
+    val schemaNode = objectMapper.readTree(schemaText)
+    schemaRegistry.getSchema(schemaNode)
   }
 
   def apply[A](model: A, file: String)(implicit format: Format[A]): Unit = {
     val schema = retrieveSchema(file)
-    val validator = JsonSchemaFactory.byDefault.getValidator
-    val json = JsonLoader.fromString(Json.prettyPrint(Json.toJson(model)))
-    val processingReport: ProcessingReport = validator.validate(schema, json)
-    if (!processingReport.isSuccess) processingReport.forEach {
+    val jsonStr = Json.prettyPrint(Json.toJson(model))
+    val jsonNode = objectMapper.readTree(jsonStr)
+    val processingReport = schema.validate(jsonNode)
+    if (!processingReport.isEmpty) processingReport.forEach {
       x =>
         logger.warn(
-          s"failed to validate against json schema $file, schema: ${x.asJson().get("schema")}, " +
-            s"instance: ${x.asJson().get("instance")}, problem: ${x.asJson().get("keyword")}"
+          s"failed to validate against json schema $file, schema: ${x.getSchemaLocation}, " +
+            s"instance: ${x.getInstanceNode}, problem: ${x.getKeyword}"
         )
     }
   }
