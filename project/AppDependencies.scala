@@ -11,7 +11,7 @@ object AppDependencies {
     "uk.gov.hmrc"    %% s"domain-$playVersion"            % "12.1.0",
     "uk.gov.hmrc"    %% s"bootstrap-backend-$playVersion" % bootstrapVersion,
     "uk.gov.hmrc"    %% "stub-data-generator"             % "1.6.0",
-    "com.github.fge" %  "json-schema-validator"           % "2.2.14"
+    "com.networknt" %  "json-schema-validator"           % "2.0.1" exclude ("com.fasterxml.jackson.core", "jackson-databind")
   )
 
   val test = Seq(
