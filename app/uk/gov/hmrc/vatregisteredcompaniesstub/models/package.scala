@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.vatregisteredcompaniesstub
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 package object models {
 
   type CompanyName = String
   type VatNumber = String
-  type ProcessingDate = LocalDateTime
+  type ProcessingDate = ZonedDateTime
 
 }
