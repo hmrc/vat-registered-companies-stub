@@ -10,12 +10,12 @@ object AppDependencies {
     ws,
     "uk.gov.hmrc"    %% s"domain-$playVersion"            % "13.0.0",
     "uk.gov.hmrc"    %% s"bootstrap-backend-$playVersion" % bootstrapVersion,
+    "uk.gov.hmrc"    %% "stub-data-generator"             % "1.6.0",
     "com.networknt" %  "json-schema-validator"           % "2.0.1" exclude ("com.fasterxml.jackson.core", "jackson-databind")
   )
 
   val test = Seq(
     "uk.gov.hmrc"            %% s"bootstrap-test-$playVersion" % bootstrapVersion,
-    "uk.gov.hmrc"            %% "stub-data-generator"             % "1.6.0",
     "org.scalatestplus"      %% "scalacheck-1-17"              % "3.2.18.0"
   ).map(_ % "test")
 }
