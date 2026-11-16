@@ -1,14 +1,14 @@
 import play.sbt.PlayImport.ws
-import sbt._
+import sbt.*
 
 object AppDependencies {
 
   private val playVersion = "play-30"
-  private val bootstrapVersion = "10.7.0"
+  private val bootstrapVersion = "10.8.0"
 
   val compile = Seq(
     ws,
-    "uk.gov.hmrc"    %% s"domain-$playVersion"            % "12.1.0",
+    "uk.gov.hmrc"    %% s"domain-$playVersion"            % "13.0.0",
     "uk.gov.hmrc"    %% s"bootstrap-backend-$playVersion" % bootstrapVersion,
     "uk.gov.hmrc"    %% "stub-data-generator"             % "1.6.0",
     "com.networknt" %  "json-schema-validator"           % "2.0.1" exclude ("com.fasterxml.jackson.core", "jackson-databind")
